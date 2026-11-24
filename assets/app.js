@@ -112,7 +112,8 @@
     ['punti.html', 'patente', 'Quanti punti ho', 'punti'],
     ['cruscotto.html#scadenze', 'calendario', 'Le mie scadenze', 'cruscotto'],
     ['veicolo.html', 'auto', 'I miei veicoli', 'veicolo'],
-    ['index.html#revisione', 'cerca', 'Controlla una revisione con la targa', '']
+    ['index.html#revisione', 'cerca', 'Controlla una revisione con la targa', ''],
+    ['index.html#servizi', 'menu', 'Tutti i servizi', '']
   ];
   const PRO = [
     ['accesso.html?profilo=operatori', 'agenzia', 'Agenzie di pratiche auto e autoscuole', 'Agenzie e autoscuole'],
@@ -268,7 +269,42 @@
   /* ---------- Pagine ---------- */
   const trova = t => DATI.veicoli.find(v => v.targa === t);
 
+  // Panoramica di tutto il portale: senza link i servizi che il prototipo non copre
+  const SPID = ['lucchetto', 'Serve SPID o CIE'];
+  const LIBERO = ['cerca', 'Basta la targa, senza accesso'];
+  const SERVIZI = [
+    ['Patente', 'patente', [
+      ['Quanti punti ho', 'punti.html', SPID],
+      ['Scarica l\'attestato dei punti', 'punti.html#t-attestato', SPID],
+      ['Quando devo rinnovare la patente', 'cruscotto.html#scadenze', SPID],
+      ['Ho perso la patente: cosa faccio']
+    ]],
+    ['Veicoli', 'auto', [
+      ['Quando scade la revisione', '#revisione', LIBERO],
+      ['I veicoli intestati a me', 'veicolo.html', SPID],
+      ['Che classe ambientale ha il mio veicolo', 'veicolo.html#classe', SPID],
+      ['Scarica la ricevuta della revisione', 'veicolo.html#revisione', SPID],
+      ['Il mio veicolo è assicurato?'],
+      ['Vendere o comprare un veicolo usato']
+    ]],
+    ['Scadenze e pratiche', 'calendario', [
+      ['Le mie scadenze', 'cruscotto.html#scadenze', SPID],
+      ['A che punto è la mia pratica'],
+      ['Prenotare un esame per la patente']
+    ]],
+    ['Per chi lavora', 'agenzia', PRO.map(p => [p[2], p[0], ['lucchetto', 'Accesso dedicato']])]
+  ];
+
   function initHome() {
+    document.getElementById('servizi-lista').innerHTML = SERVIZI.map(([titolo, icona, voci]) =>
+      `<div class="gruppo"><h3>${ico(icona)}${titolo}</h3><ul>` +
+      voci.map(([nome, href, acc]) => href
+        ? `<li><a class="servizio" href="${href}"><span class="servizio-testo"><span class="servizio-nome">${nome}</span>` +
+          `<span class="servizio-accesso">${ico(acc[0])}${acc[1]}</span></span>${ico('avanti')}</a></li>`
+        : `<li><div class="servizio servizio-spento"><span class="servizio-testo"><span class="servizio-nome">${nome}</span>` +
+          '<span class="servizio-accesso">Non attivo in questo prototipo</span></span></div></li>').join('') +
+      '</ul></div>').join('');
+
     const form = document.getElementById('form-targa');
     const input = document.getElementById('targa');
     const errore = document.getElementById('targa-errore');
