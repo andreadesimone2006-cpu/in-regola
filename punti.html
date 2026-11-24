@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quanti punti ho | In regola</title>
+<meta name="description" content="Saldo dei punti patente, storico delle variazioni e come recuperarli. Progetto didattico, dati di esempio.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0b2f57">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/titillium-web-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-pagina="punti" data-area="privata">
+<div id="testata"></div>
+<script src="assets/app.js"></script>
+
+<main id="contenuto" tabindex="-1">
+  <div class="contenitore pila">
+    <nav class="briciole" aria-label="Sei qui">
+      <ol><li><a href="cruscotto.html">Riepilogo</a></li><li aria-current="page">Punti patente</li></ol>
+    </nav>
+
+    <section class="pila-s" aria-labelledby="risposta">
+      <h1 id="risposta" class="risposta"><span>Hai</span> <span class="numero" data-saldo>19</span> <span>punti sulla patente</span></h1>
+      <p class="aiuto">Saldo aggiornato al <span data-oggi></span>. Patente di categoria B.</p>
+      <div class="scala" role="img" aria-label="19 punti su un massimo di 30. Si parte da 20.">
+        <span class="scala-tacca">20: punteggio di partenza</span>
+        <div class="scala-barra"><div class="scala-pieno"></div></div>
+        <div class="scala-estremi"><span>0</span><span>30: il massimo</span></div>
+      </div>
+      <div class="avviso avviso-ok">
+        <svg class="icona" aria-hidden="true" focusable="false"><use href="#i-spunta"></use></svg>
+        <div class="avviso-corpo">
+          <p><strong>La tua patente è valida: puoi guidare normalmente.</strong></p>
+          <p>Devi rifare l'esame solo se i punti arrivano a 0.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pila-s testo" aria-labelledby="t-perche">
+      <h2 id="t-perche">Perché sono cambiati</h2>
+      <p>Il 20 novembre 2026 ti sono stati tolti <strong>3 punti</strong> per eccesso di velocità: andavi oltre il limite, ma di non più di 40 km/h. La multa è del 17 novembre 2026, a Brescia.</p>
+      <p>La multa si paga a parte, con l'avviso che ti arriva a casa o via PEC. Su questo sito non si paga nulla.</p>
+    </section>
+
+    <section class="pila-s" aria-labelledby="t-storico">
+      <h2 id="t-storico">Storico delle variazioni</h2>
+      <ol class="storico" id="lista-storico"></ol>
+    </section>
+
+    <section class="pila-s" aria-labelledby="t-recupero">
+      <h2 id="t-recupero">Come recuperare i punti</h2>
+      <div class="opzioni">
+        <div class="pannello pila-xs">
+          <h3>Senza fare nulla</h3>
+          <p>Se per due anni non perdi altri punti, torni in automatico a 20. Per te vuol dire a novembre 2028. È gratis.</p>
+        </div>
+        <div class="pannello pila-xs">
+          <h3>Con un corso in autoscuola</h3>
+          <p>Un corso di 12 ore ti restituisce 6 punti. Lo organizzano le autoscuole, a pagamento. Finito il corso, i punti si aggiornano qui.</p>
+        </div>
+      </div>
+      <details>
+        <summary><svg class="icona" aria-hidden="true" focusable="false"><use href="#i-avanti"></use></svg>Cosa succede se i punti arrivano a 0?</summary>
+        <p class="testo">Ti arriva una comunicazione e devi rifare l'esame di teoria e di guida (si chiama revisione della patente). Se non lo fai nei tempi indicati, la patente viene sospesa.</p>
+      </details>
+    </section>
+
+    <section class="pila-s" aria-labelledby="t-attestato">
+      <h2 id="t-attestato">Ti serve un documento?</h2>
+      <p class="testo">Scarica l'attestato del saldo punti in PDF, da conservare o da mostrare a chi te lo chiede.</p>
+      <div class="bottoni">
+        <button class="btn btn-secondario" type="button" id="scarica-punti"><svg class="icona" aria-hidden="true" focusable="false"><use href="#i-scarica"></use></svg>Scarica l'attestato (PDF)</button>
+      </div>
+      <div id="esito-punti"></div>
+    </section>
+  </div>
+</main>
+
+<div id="piede"></div>
+</body>
+</html>

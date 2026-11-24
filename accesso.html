@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Entra con SPID o CIE | In regola</title>
+<meta name="description" content="Entra nella tua area con SPID o con la Carta d'identità elettronica. Progetto didattico, accesso simulato.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0b2f57">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/titillium-web-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-pagina="accesso">
+<div id="testata"></div>
+<script src="assets/app.js"></script>
+
+<main id="contenuto" tabindex="-1">
+  <div class="contenitore stretto pila">
+    <nav class="briciole" aria-label="Sei qui">
+      <ol><li><a href="index.html">Home</a></li><li aria-current="page" id="briciola-accesso">Entra</li></ol>
+    </nav>
+
+    <div class="pila-s">
+      <h1 id="titolo-accesso">Entra con SPID o CIE</h1>
+      <p class="intro" id="destinazione">Dopo l'accesso vedi in una sola pagina punti, scadenze e veicoli.</p>
+    </div>
+
+    <div id="area-profilo" class="pila-s" hidden>
+      <div class="avviso avviso-info">
+        <svg class="icona" aria-hidden="true" focusable="false"><use href="#i-info"></use></svg>
+        <div class="avviso-corpo">
+          <p><strong>In questo prototipo è attiva solo l'area per i cittadini.</strong></p>
+          <p>Qui agenzie, autoscuole, imprese ed enti avranno un accesso separato, con le credenziali dell'azienda o dell'ente e i servizi per il loro lavoro.</p>
+        </div>
+      </div>
+      <div class="bottoni">
+        <a class="btn btn-primario" href="accesso.html">Entra come cittadino</a>
+        <a class="btn btn-secondario" href="index.html">Torna alla home</a>
+      </div>
+    </div>
+
+    <div id="percorso" class="pila">
+      <section id="cosa-serve" class="pila-s" aria-labelledby="t-serve">
+        <h2 id="t-serve">Prima di cominciare, tieni a portata di mano</h2>
+        <div class="opzioni">
+          <div class="pannello pila-xs">
+            <h3>Se entri con SPID</h3>
+            <ul class="puntato">
+              <li>Nome utente e password di SPID</li>
+              <li>Il telefono, per confermare con l'app del gestore o con il codice via SMS</li>
+            </ul>
+          </div>
+          <div class="pannello pila-xs">
+            <h3>Se entri con la CIE</h3>
+            <ul class="puntato">
+              <li>La Carta d'identità elettronica</li>
+              <li>Il PIN di 8 cifre: le prime 4 sono sulla ricevuta del Comune, le ultime 4 nella lettera arrivata con la carta</li>
+              <li>Uno smartphone con NFC e l'app CieID</li>
+            </ul>
+          </div>
+        </div>
+        <p class="rassicura"><svg class="icona" aria-hidden="true" focusable="false"><use href="#i-lucchetto"></use></svg>Entrare è gratis e non comporta pagamenti.</p>
+        <details>
+          <summary><svg class="icona" aria-hidden="true" focusable="false"><use href="#i-avanti"></use></svg>Non hai né SPID né la CIE?</summary>
+          <p>SPID si chiede a uno dei gestori riconosciuti, online o di persona, con un documento d'identità e la tessera sanitaria. La CIE si chiede in Comune. Se ti serve aiuto, chiama il numero verde che trovi in fondo alla pagina.</p>
+        </details>
+      </section>
+
+      <form id="form-accesso" class="pila-m" novalidate>
+        <div id="errore-accesso"></div>
+        <p class="passo">Passo 1 di 2</p>
+        <div class="campo">
+          <fieldset aria-describedby="metodo-errore">
+            <legend><h2>Come vuoi entrare?</h2></legend>
+            <p class="errore-campo" id="metodo-errore" hidden></p>
+            <div class="scelte">
+              <label class="scelta"><input type="radio" name="metodo" value="spid"><span><strong>Con SPID</strong><span class="aiuto">Nome utente, password e telefono</span></span></label>
+              <label class="scelta"><input type="radio" name="metodo" value="cie"><span><strong>Con la CIE</strong><span class="aiuto">La carta d'identità e il suo PIN</span></span></label>
+            </div>
+          </fieldset>
+        </div>
+        <div class="campo" id="campo-gestore" hidden>
+          <label for="gestore">Chi ti ha dato SPID?</label>
+          <p class="aiuto" id="gestore-aiuto">È l'azienda che hai scelto quando hai attivato SPID. In questo prototipo i nomi sono di fantasia.</p>
+          <p class="errore-campo" id="gestore-errore" hidden></p>
+          <select id="gestore" aria-describedby="gestore-aiuto gestore-errore">
+            <option value="">Scegli dall'elenco</option>
+            <option>Aurora ID</option>
+            <option>Chiave Nord</option>
+            <option>Identità Facile</option>
+            <option>Sigillo Digitale</option>
+          </select>
+          <details>
+            <summary><svg class="icona" aria-hidden="true" focusable="false"><use href="#i-avanti"></use></svg>Non ricordo il gestore</summary>
+            <p>Cerca nella tua email il messaggio di attivazione di SPID, oppure guarda quale app usi per confermare gli accessi. Se SPID te l'ha attivato un familiare, chiedi a lui.</p>
+          </details>
+        </div>
+        <div class="bottoni"><button class="btn btn-primario" type="submit">Continua</button></div>
+      </form>
+
+      <section id="passo-2" class="pila-m" aria-labelledby="titolo-passo-2" hidden>
+        <p class="passo">Passo 2 di 2</p>
+        <h2 id="titolo-passo-2" tabindex="-1">Conferma sul sito del gestore</h2>
+        <div class="avviso avviso-info">
+          <svg class="icona" aria-hidden="true" focusable="false"><use href="#i-info"></use></svg>
+          <div class="avviso-corpo">
+            <p id="testo-passo-2"></p>
+            <p><strong>Simulazione:</strong> in questo prototipo non si scrivono dati veri. Premi “Conferma l'accesso” per continuare, oppure “Annulla” per vedere cosa succede se ti fermi.</p>
+          </div>
+        </div>
+        <div class="bottoni">
+          <button class="btn btn-primario" type="button" id="conferma">Conferma l'accesso</button>
+          <button class="btn btn-secondario" type="button" id="annulla">Annulla</button>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+
+<div id="piede"></div>
+</body>
+</html>

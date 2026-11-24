@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>In regola: punti patente, revisione e scadenze</title>
+<meta name="description" content="Controlla i punti della patente, la revisione e le scadenze dei tuoi veicoli. Progetto didattico, dati di esempio.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0b2f57">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/titillium-web-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-pagina="home">
+<div id="testata"></div>
+<script src="assets/app.js"></script>
+
+<main id="contenuto" tabindex="-1">
+  <div class="contenitore pila">
+    <div class="pila-s">
+      <h1>Cosa vuoi controllare oggi?</h1>
+      <p class="intro">Punti della patente, revisione e scadenze dei tuoi veicoli, tutto in un posto.</p>
+      <p class="rassicura"><svg class="icona" aria-hidden="true" focusable="false"><use href="#i-scudo"></use></svg>Controllare è gratis: qui non si paga nulla.</p>
+    </div>
+
+    <div class="home-griglia">
+      <section class="pila-s" aria-labelledby="t-azioni">
+        <h2 id="t-azioni" class="vh">Le cose che si fanno più spesso</h2>
+        <ul class="azioni">
+          <li><a class="azione" href="punti.html">
+            <span class="azione-icona"><svg class="icona" aria-hidden="true" focusable="false"><use href="#i-patente"></use></svg></span>
+            <span><strong>Quanti punti ho sulla patente?</strong><span class="aiuto">Entri con SPID o CIE e lo vedi subito</span></span>
+            <svg class="icona" aria-hidden="true" focusable="false"><use href="#i-avanti"></use></svg></a></li>
+          <li><a class="azione" href="#revisione">
+            <span class="azione-icona"><svg class="icona" aria-hidden="true" focusable="false"><use href="#i-calendario"></use></svg></span>
+            <span><strong>Quando scade la revisione?</strong><span class="aiuto">Basta la targa, senza accesso</span></span>
+            <svg class="icona" aria-hidden="true" focusable="false"><use href="#i-avanti"></use></svg></a></li>
+          <li><a class="azione" href="cruscotto.html#scadenze">
+            <span class="azione-icona"><svg class="icona" aria-hidden="true" focusable="false"><use href="#i-cruscotto"></use></svg></span>
+            <span><strong>Le mie scadenze</strong><span class="aiuto">Revisioni e rinnovo della patente</span></span>
+            <svg class="icona" aria-hidden="true" focusable="false"><use href="#i-avanti"></use></svg></a></li>
+          <li><a class="azione" href="veicolo.html">
+            <span class="azione-icona"><svg class="icona" aria-hidden="true" focusable="false"><use href="#i-auto"></use></svg></span>
+            <span><strong>I miei veicoli</strong><span class="aiuto">Dati, revisione e classe ambientale</span></span>
+            <svg class="icona" aria-hidden="true" focusable="false"><use href="#i-avanti"></use></svg></a></li>
+        </ul>
+      </section>
+
+      <section class="pannello" id="entra">
+        <div class="pila-s" data-se="ospite">
+          <h2>Entra nella tua area</h2>
+          <p>Vedi in una sola pagina i tuoi punti, le scadenze e i veicoli intestati a te.</p>
+          <div class="bottoni">
+            <a class="btn btn-primario" href="accesso.html?metodo=spid">Entra con SPID</a>
+            <a class="btn btn-primario" href="accesso.html?metodo=cie">Entra con la CIE</a>
+          </div>
+          <p class="aiuto">Prima di cominciare ti diciamo cosa tenere a portata di mano. <a href="accesso.html#cosa-serve">Cosa serve per entrare</a></p>
+        </div>
+        <div class="pila-s" data-se="utente" hidden>
+          <h2>Sei nella tua area</h2>
+          <p>Punti, scadenze e veicoli sono nel tuo riepilogo.</p>
+          <div class="bottoni"><a class="btn btn-primario" href="cruscotto.html">Vai al riepilogo</a></div>
+        </div>
+      </section>
+    </div>
+
+    <section id="revisione" class="pila-s" aria-labelledby="t-revisione">
+      <h2 id="t-revisione">Controlla la revisione con la targa</h2>
+      <p class="testo">Scopri entro quando va fatta la prossima revisione di un'auto o di una moto. Non serve entrare.</p>
+      <form id="form-targa" class="pila-s" novalidate>
+        <div class="campo">
+          <label for="targa">Targa del veicolo</label>
+          <p class="aiuto" id="targa-aiuto">Ad esempio XA 482 KT. Puoi scriverla con o senza spazi.</p>
+          <p class="errore-campo" id="targa-errore" hidden></p>
+          <input type="text" id="targa" name="targa" class="campo-targa" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="12" aria-describedby="targa-aiuto targa-errore">
+        </div>
+        <div class="bottoni"><button class="btn btn-primario" type="submit">Controlla la revisione</button></div>
+      </form>
+      <div id="esito-targa" class="esito" aria-live="polite"></div>
+    </section>
+
+    <div class="avviso avviso-info">
+      <svg class="icona" aria-hidden="true" focusable="false"><use href="#i-info"></use></svg>
+      <div class="avviso-corpo">
+        <h2 class="h3">Attenzione ai messaggi falsi</h2>
+        <p>Non mandiamo SMS o email con link per pagare multe o recuperare punti. Se ricevi un messaggio così, non aprire il link e non pagare: controlla qui, entrando con SPID o CIE.</p>
+      </div>
+    </div>
+
+    <section class="pila-s" aria-labelledby="t-pro">
+      <h2 id="t-pro">Lavori con patenti e veicoli?</h2>
+      <p class="testo">Agenzie di pratiche auto, autoscuole, imprese di autotrasporto ed enti pubblici hanno un accesso dedicato.</p>
+      <ul class="lista-link">
+        <li><a href="accesso.html?profilo=operatori"><svg class="icona" aria-hidden="true" focusable="false"><use href="#i-agenzia"></use></svg><span>Agenzie di pratiche auto e autoscuole</span><svg class="icona" aria-hidden="true" focusable="false"><use href="#i-avanti"></use></svg></a></li>
+        <li><a href="accesso.html?profilo=imprese"><svg class="icona" aria-hidden="true" focusable="false"><use href="#i-camion"></use></svg><span>Imprese di autotrasporto</span><svg class="icona" aria-hidden="true" focusable="false"><use href="#i-avanti"></use></svg></a></li>
+        <li><a href="accesso.html?profilo=enti"><svg class="icona" aria-hidden="true" focusable="false"><use href="#i-ente"></use></svg><span>Enti pubblici</span><svg class="icona" aria-hidden="true" focusable="false"><use href="#i-avanti"></use></svg></a></li>
+      </ul>
+    </section>
+  </div>
+</main>
+
+<div id="piede"></div>
+</body>
+</html>
