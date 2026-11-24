@@ -79,6 +79,7 @@
   /* ---------- Icone (disegnate a mano, tratto 2px su griglia 24) ---------- */
   const ICONE = {
     menu: '<path d="M4 6h16M4 12h16M4 18h16"/>',
+    casa: '<path d="M4 11.5 12 5l8 6.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z"/>',
     chiudi: '<path d="M6 6l12 12M18 6 6 18"/>',
     avanti: '<path d="m9 6 6 6-6 6"/>',
     spunta: '<circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.7 2.7 5.5-5.7"/>',
@@ -109,6 +110,7 @@
 
   /* ---------- Testata, menu e barra in basso ---------- */
   const MENU = [
+    ['index.html', 'casa', 'Home', 'home'],
     ['punti.html', 'patente', 'Quanti punti ho', 'punti'],
     ['cruscotto.html#scadenze', 'calendario', 'Le mie scadenze', 'cruscotto'],
     ['veicolo.html', 'auto', 'I miei veicoli', 'veicolo'],

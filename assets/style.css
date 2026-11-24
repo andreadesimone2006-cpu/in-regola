@@ -69,7 +69,8 @@ main { padding-block: 1.5rem 3.5rem; }
 
 /* Fascia del progetto (in alto) */
 .fascia { background: var(--inchiostro); color: #fff; font-size: 1rem; }
-.fascia .contenitore { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding-block: 0.4rem; min-height: 2.5rem; }
+.fascia .contenitore { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.25rem 1rem; padding-block: 0.4rem; min-height: 2.5rem; }
+.fascia-pro a, .fascia-pro span { white-space: nowrap; }
 .fascia a { color: #fff; }
 .fascia-pro { display: none; gap: 1.25rem; align-items: center; }
 .fascia-pro span { color: #c9d3df; }
@@ -337,7 +338,7 @@ tr:last-child td { border-bottom: 0; }
   .btn-menu { display: none; }
   .menu:not(.aperto) { display: block; }
   .menu .contenitore { flex-direction: row; padding-block: 0; }
-  .menu .menu-cittadino { display: flex; gap: 2rem; }
+  .menu .menu-cittadino { display: flex; flex-wrap: wrap; column-gap: 2rem; }
   .menu li + li { border-top: 0; }
   .menu a { min-height: 3.5rem; border-bottom: 4px solid transparent; padding-top: 4px; }
   .menu a[aria-current="page"] { border-bottom-color: var(--blu); }
