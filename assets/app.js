@@ -1,4 +1,4 @@
-/* In regola: parti comuni (testata, menu, piede, cookie, accesso simulato) e logica di ogni pagina.
+/* ViaLibera: parti comuni (testata, menu, piede, cookie, accesso simulato) e logica di ogni pagina.
    Va caricato subito dopo <div id="testata">: disegna la testata prima del resto della pagina. */
 (function () {
   'use strict';
@@ -13,7 +13,7 @@
   function scrivi(tipo, chiave, valore) { try { window[tipo].setItem(chiave, JSON.stringify(valore)); } catch (e) { /* memoria non disponibile */ } }
   function togli(tipo, chiave) { try { window[tipo].removeItem(chiave); } catch (e) { /* niente da togliere */ } }
 
-  const sessione = leggi('sessionStorage', 'ir-accesso');
+  const sessione = leggi('sessionStorage', 'vl-accesso');
 
   // Area personale senza accesso: si passa dalla pagina di accesso e poi si torna qui
   if (privata && !sessione) {
@@ -105,16 +105,12 @@
   corpo.insertAdjacentHTML('afterbegin', '<svg xmlns="http://www.w3.org/2000/svg" style="display:none">' +
     Object.keys(ICONE).map(k => `<symbol id="i-${k}" viewBox="0 0 24 24">${ICONE[k]}</symbol>`).join('') + '</svg>');
 
-  // Logo: monogramma "ir" disegnato come segnaletica stradale (generato con Higgsfield in SVG)
+  // Logo: "VL" tracciato come una sola strada con la mezzeria tratteggiata (generato con Higgsfield in SVG)
   const LOGO = '<svg viewBox="0 0 1024 1024" aria-hidden="true" focusable="false">' +
-    '<rect x="28" y="28" width="968" height="968" rx="180" fill="#0059b3"/>' +
-    '<g fill="#fff"><circle cx="293" cy="240" r="86"/><rect x="205" y="350" width="176" height="537" rx="72"/>' +
-    '<path d="M497 887C453 887 424 855 424 811V550C424 423 527 320 654 320H821C860 320 892 351 892 390S860 461 821 461H686C631 461 587 501 587 556V811C587 855 557 887 514 887Z"/></g>' +
-    '<g fill="#0059b3"><path d="M279 392H307V463H279ZM279 513H307V584H279ZM279 633H307V704H279ZM279 754H307V825H279Z"/>' +
-    '<path d="M492 790H518V850H492ZM491 683H517V749H491ZM490 571H517V638H490Z"/>' +
-    '<path d="M489 523C491 497 498 473 511 451L535 465C525 483 519 502 517 525Z"/>' +
-    '<path d="M540 416C558 400 579 388 603 381L611 406C591 412 573 422 558 436Z"/>' +
-    '<path d="M650 372H719V400H650ZM766 372H835V400H766Z"/></g></svg>';
+    '<rect x="12" y="12" width="1000" height="1000" rx="166" fill="#0059b3"/>' +
+    '<g fill="none" stroke-linecap="round" stroke-linejoin="round">' +
+    '<path d="M127 298 297 699Q328 761 359 699L509 343Q535 290 580 290Q649 290 649 357V644Q649 716 719 716H900" stroke="#fff" stroke-width="130"/>' +
+    '<path d="m127 294 16 36m20 47 17 39m20 48 17 39m20 48 17 40m20 48 17 39M315 719q18 12 34-4m20-42 16-39m20-49 16-39m21-50 16-39m21-53 16-39m20-51q9-21 28-29m47-7q24 0 39 14m21 44v43m0 48v43m0 49v43m0 48v43m20 44q15 17 38 17m52 0h43m52 0h43" stroke="#0059b3" stroke-width="19"/></g></svg>';
 
   /* ---------- Testata, menu e barra in basso ---------- */
   const MENU = [
@@ -143,7 +139,7 @@
       '<nav class="fascia-pro" aria-label="Accesso per i professionisti"><span>Accesso dedicato:</span>' +
       PRO.map(p => `<a href="${p[0]}">${p[3]}</a>`).join('') + '</nav></div></div>' +
     '<header class="testata"><div class="contenitore testata-riga">' +
-      `<a class="logo" href="index.html">${LOGO}<span>In regola</span></a>` +
+      `<a class="logo" href="index.html">${LOGO}<span>ViaLibera</span></a>` +
       '<div class="testata-azioni">' +
         (sessione
           ? `<a class="btn-testata solo-largo" href="cruscotto.html">${ico('utente')}${DATI.nome}</a><button class="btn-testata" type="button" data-esci>${ico('esci')}Esci</button>`
@@ -175,13 +171,13 @@
   });
 
   /* ---------- Cookie: la scelta vale 6 mesi, poi si richiede ---------- */
-  const COOKIE = 'ir-cookie';
+  const COOKIE = 'vl-cookie';
   const SEI_MESI = 182 * 864e5;
   function sceltaCookie() { const c = leggi('localStorage', COOKIE); return c && Date.now() - c.quando < SEI_MESI ? c : null; }
   function salvaCookie(statistiche) {
     const c = { statistiche: !!statistiche, quando: Date.now() };
     scrivi('localStorage', COOKIE, c);
-    document.dispatchEvent(new CustomEvent('ir-cookie'));
+    document.dispatchEvent(new CustomEvent('vl-cookie'));
     return c;
   }
   function descriviScelta(c) { return c.statistiche ? 'cookie tecnici e di statistica' : 'solo cookie tecnici'; }
@@ -241,7 +237,7 @@
   function creaPdf(nomeFile, titolo, righe) {
     const doc = new window.jspdf.jsPDF({ unit: 'mm', format: 'a4' });
     doc.setFillColor(11, 47, 87); doc.rect(0, 0, 210, 24, 'F');
-    doc.setTextColor(255); doc.setFont('helvetica', 'bold'); doc.setFontSize(16); doc.text('In regola', 20, 15);
+    doc.setTextColor(255); doc.setFont('helvetica', 'bold'); doc.setFontSize(16); doc.text('ViaLibera', 20, 15);
     doc.setFont('helvetica', 'normal'); doc.setFontSize(9);
     doc.text('Progetto didattico d\'esame: documento di esempio, senza valore legale', 190, 15, { align: 'right' });
     doc.setTextColor(23, 33, 46); doc.setFont('helvetica', 'bold'); doc.setFontSize(18); doc.text(titolo, 20, 42);
@@ -377,7 +373,7 @@
       const titolo = 'Accesso per ' + profilo;
       document.getElementById('titolo-accesso').textContent = titolo;
       document.getElementById('briciola-accesso').textContent = titolo;
-      document.title = titolo.charAt(0).toUpperCase() + titolo.slice(1) + ' | In regola';
+      document.title = titolo.charAt(0).toUpperCase() + titolo.slice(1) + ' | ViaLibera';
       document.getElementById('destinazione').textContent = 'Un ingresso separato per chi usa il portale per lavoro.';
       document.getElementById('area-profilo').hidden = false;
       document.getElementById('percorso').hidden = true;
@@ -453,7 +449,7 @@
       btn.disabled = true;
       btn.textContent = 'Accesso in corso…';
       setTimeout(() => {
-        scrivi('sessionStorage', 'ir-accesso', { metodo: m, quando: Date.now() });
+        scrivi('sessionStorage', 'vl-accesso', { metodo: m, quando: Date.now() });
         const [base, hash] = vai.split('#');
         location.href = base + (base.includes('?') ? '&' : '?') + 'benvenuto=' + m + (hash ? '#' + hash : '');
       }, 700);
@@ -530,7 +526,7 @@
       scheda.innerHTML = '<h1 class="vh">Veicolo non trovato</h1>' + avvisoHtml('errore', 'Non troviamo questo veicolo tra quelli intestati a te.', 'Scegli uno dei tuoi veicoli qui sopra. Se un veicolo manca, controlla che il passaggio di proprietà sia stato registrato.');
       return;
     }
-    document.title = `${v.nome}: revisione e dati | In regola`;
+    document.title = `${v.nome}: revisione e dati | ViaLibera`;
     document.getElementById('briciola-veicolo').textContent = v.nome;
     const r = v.revisione;
     const s = stato(r.scadenza);
@@ -613,7 +609,7 @@
         : 'Non hai ancora fatto una scelta: per ora usiamo solo i cookie tecnici.';
     }
     mostra();
-    document.addEventListener('ir-cookie', mostra);
+    document.addEventListener('vl-cookie', mostra);
     form.addEventListener('submit', e => {
       e.preventDefault();
       const c = salvaCookie(ck.checked);
@@ -627,7 +623,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('piede').outerHTML =
       '<footer class="piede"><div class="contenitore"><div class="piede-griglia">' +
-        `<div><a class="logo" href="index.html">${LOGO}<span>In regola</span></a>` +
+        `<div><a class="logo" href="index.html">${LOGO}<span>ViaLibera</span></a>` +
         '<p>Progetto didattico d\'esame UX/UI, ITS Machina Lonati, MARTECH 2° anno. Non è il sito del Ministero e non è collegato a servizi ufficiali. Nomi, targhe e numeri sono di fantasia.</p></div>' +
         '<div><h2>Assistenza</h2><p>Numero verde 800 000 000 (esempio)<br>dal lunedì al venerdì, dalle 8 alle 18</p><p>Email: assistenza@example.org</p></div>' +
         '<div><h2>Informazioni legali</h2><ul>' +
@@ -647,7 +643,7 @@
 
     document.addEventListener('click', e => {
       if (e.target.closest('[data-esci]')) {
-        togli('sessionStorage', 'ir-accesso');
+        togli('sessionStorage', 'vl-accesso');
         location.href = 'index.html?uscito=1';
       } else if (e.target.closest('[data-apri-cookie]')) {
         apriBanner(true).querySelector('h2').focus();
