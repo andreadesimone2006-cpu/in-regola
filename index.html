@@ -7,13 +7,13 @@
 <meta name="description" content="Controlla i punti della patente, la revisione e le scadenze dei tuoi veicoli. Progetto didattico, dati di esempio.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#0b2f57">
-<link rel="icon" href="favicon.svg?v=7" type="image/svg+xml">
+<link rel="icon" href="favicon.svg?v=8" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/titillium-web-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/style.css?v=7">
+<link rel="stylesheet" href="assets/style.css?v=8">
 </head>
 <body data-pagina="home">
 <div id="testata"></div>
-<script src="assets/app.js?v=7"></script>
+<script src="assets/app.js?v=8"></script>
 
 <main id="contenuto" tabindex="-1">
   <div class="contenitore pila">
@@ -78,7 +78,7 @@
           <label for="targa">Targa del veicolo</label>
           <p class="aiuto" id="targa-aiuto">Ad esempio XA 482 KT. Puoi scriverla con o senza spazi.</p>
           <p class="errore-campo" id="targa-errore" hidden></p>
-          <input type="text" id="targa" name="targa" class="campo-targa" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="12" aria-describedby="targa-aiuto targa-errore">
+          <input type="text" id="targa" name="targa" class="campo-targa" autocomplete="off" autocapitalize="characters" spellcheck="false" enterkeyhint="go" maxlength="12" aria-describedby="targa-aiuto targa-errore">
         </div>
         <div class="bottoni"><button class="btn btn-primario" type="submit">Controlla la revisione</button></div>
       </form>
