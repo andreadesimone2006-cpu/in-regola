@@ -641,10 +641,34 @@
     document.querySelectorAll('[data-saldo]').forEach(el => { el.textContent = DATI.punti.saldo; });
     document.querySelectorAll('[data-se]').forEach(el => { el.hidden = (el.dataset.se === 'utente') !== !!sessione; });
 
+    function esci() {
+      togli('sessionStorage', 'vl-accesso');
+      location.href = 'index.html?uscito=1';
+    }
+    // Prima di uscire chiede conferma: un tocco per sbaglio non deve chiudere la sessione
+    function chiediUscita() {
+      let d = document.getElementById('conferma-uscita');
+      if (!d) {
+        document.body.insertAdjacentHTML('beforeend',
+          '<dialog id="conferma-uscita" class="dialogo" aria-labelledby="t-uscita" aria-describedby="d-uscita">' +
+            '<form method="dialog" class="pila-s">' +
+              '<h2 id="t-uscita">Vuoi davvero uscire?</h2>' +
+              '<p id="d-uscita">Per rivedere punti, scadenze e veicoli dovrai entrare di nuovo con SPID o CIE.</p>' +
+              '<div class="bottoni"><button class="btn btn-primario" value="esci">Sì, esci</button>' +
+              '<button class="btn btn-secondario" value="resta" autofocus>No, resta qui</button></div>' +
+            '</form></dialog>');
+        d = document.getElementById('conferma-uscita');
+        d.addEventListener('close', () => { if (d.returnValue === 'esci') esci(); });
+        d.addEventListener('click', ev => { if (ev.target === d) d.close(); }); // tocco fuori dalla finestra = resta
+      }
+      if (typeof d.showModal !== 'function') { if (confirm('Vuoi davvero uscire?')) esci(); return; } // browser senza <dialog>
+      d.returnValue = '';
+      d.showModal();
+    }
+
     document.addEventListener('click', e => {
       if (e.target.closest('[data-esci]')) {
-        togli('sessionStorage', 'vl-accesso');
-        location.href = 'index.html?uscito=1';
+        chiediUscita();
       } else if (e.target.closest('[data-apri-cookie]')) {
         apriBanner(true).querySelector('h2').focus();
       } else if (e.target.closest('.avviso-chiudi')) {
