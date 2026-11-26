@@ -306,8 +306,8 @@ tr:last-child td { border-bottom: 0; }
 .piede-fondo { margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid rgba(255, 255, 255, 0.25); font-size: 1rem; display: grid; gap: 0.25rem; }
 
 /* Illustrazioni: riquadro blu, mani a linea bianca (generate con Higgsfield) e schede di vetro fatte con i componenti del sito.
-   Sono decorative (aria-hidden) e si vedono da 48rem in su: sul telefono vengono prima le azioni. Misure in cqi: scalano con il riquadro. */
-.illu { display: none; position: relative; overflow: hidden; aspect-ratio: 4 / 3; border-radius: 1.5rem; container-type: inline-size;
+   Sono decorative (aria-hidden). Misure in cqi: scalano con il riquadro. */
+.illu { position: relative; overflow: hidden; aspect-ratio: 4 / 3; border-radius: 1.5rem; container-type: inline-size;
   background: radial-gradient(circle at 88% 18%, #1c6dc0 0 40%, transparent 40.3%), var(--blu); }
 .illu > * { position: absolute; }
 .illu-telefono { display: flex; flex-direction: column; gap: 3cqi; padding: 4cqi 3.5cqi; border-radius: 7cqi; background: rgba(255, 255, 255, 0.18); border: 1px solid rgba(255, 255, 255, 0.6); }
@@ -380,10 +380,21 @@ tr:last-child td { border-bottom: 0; }
   .piede-griglia { grid-template-columns: 1.4fr 1fr 1fr; }
 }
 
+/* Telefono: l'illustrazione della Home scende sotto le azioni, che restano in cima allo schermo */
+@media (max-width: 47.99rem) {
+  .home-apertura { display: contents; }
+  .illu-home { order: 1; }
+  .home-griglia ~ * { order: 2; }
+  .illu-accesso { margin-top: 1.5rem; }
+}
+
 @media (min-width: 48rem) {
-  .illu { display: block; }
   .con-illu { display: grid; grid-template-columns: 1fr clamp(14rem, 34%, 24rem); gap: 2.5rem; align-items: start; }
   .stretto .con-illu { grid-template-columns: 1fr 17rem; }
+  /* Controllo con la targa: sul telefono l'illustrazione sta tra testo e modulo, qui va a destra */
+  #revisione { gap: 1rem 2.5rem; }
+  #revisione > * { grid-column: 1; }
+  #revisione > .illu { grid-column: 2; grid-row: 1 / span 4; }
   .servizi { grid-template-columns: 1fr 1fr; gap: 2.5rem 3rem; }
   .storico li { grid-template-columns: 11rem 1fr auto 6.5rem; align-items: baseline; }
   .storico time { grid-area: 1 / 1; }
