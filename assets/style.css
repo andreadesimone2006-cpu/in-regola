@@ -306,7 +306,7 @@ tr:last-child td { border-bottom: 0; }
 .piede-fondo { margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid rgba(255, 255, 255, 0.25); font-size: 1rem; display: grid; gap: 0.25rem; }
 
 /* Finestra di conferma (uscita dall'account). Il padding sta nel form: così un tocco sul fondo scuro ha come bersaglio il dialog */
-.dialogo { width: min(30rem, calc(100% - 2rem)); padding: 0; border: 0; border-top: 4px solid var(--blu-notte); border-radius: var(--r); background: var(--carta); color: var(--inchiostro); box-shadow: 0 12px 40px rgba(11, 47, 87, 0.3); }
+.dialogo { width: min(30rem, calc(100% - 2rem)); padding: 0; border: 0; border-top: 4px solid var(--blu-notte); border-radius: 0 0 var(--r) var(--r); background: var(--carta); color: var(--inchiostro); box-shadow: 0 12px 40px rgba(11, 47, 87, 0.3); }
 .dialogo form { padding: var(--spazio); }
 .dialogo::backdrop { background: rgba(11, 47, 87, 0.55); }
 
