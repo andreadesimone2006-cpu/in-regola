@@ -305,13 +305,13 @@ tr:last-child td { border-bottom: 0; }
 .piede p { color: #dbe3ec; }
 .piede-fondo { margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid rgba(255, 255, 255, 0.25); font-size: 1rem; display: grid; gap: 0.25rem; }
 
-/* Illustrazioni: riquadro blu, mani a linea bianca (generate con Higgsfield) e schede di vetro fatte con i componenti del sito.
-   Sono decorative (aria-hidden). Misure in cqi: scalano con il riquadro. */
-.illu { position: relative; overflow: hidden; aspect-ratio: 4 / 3; border-radius: 1.5rem; container-type: inline-size;
-  background: radial-gradient(circle at 88% 18%, #1c6dc0 0 40%, transparent 40.3%), var(--blu); }
+/* Illustrazioni libere nella pagina, come sul sito di IO: mani a linea (generate con Higgsfield) e schede fatte con i componenti del sito.
+   Niente riquadro: le mani sono blu perché stanno sul fondo chiaro. Decorative (aria-hidden). Misure in cqi: scalano con la larghezza.
+   overflow: hidden taglia solo le braccia, che così finiscono aperte come sul sito di IO. */
+.illu { position: relative; overflow: hidden; aspect-ratio: 4 / 3; container-type: inline-size; }
 .illu > * { position: absolute; }
-.illu-telefono { display: flex; flex-direction: column; gap: 3cqi; padding: 4cqi 3.5cqi; border-radius: 7cqi; background: rgba(255, 255, 255, 0.18); border: 1px solid rgba(255, 255, 255, 0.6); }
-.illu-vetro { display: flex; flex-direction: column; gap: 1.5cqi; padding: 3cqi 3.5cqi; border-radius: 3cqi; background: rgba(255, 255, 255, 0.92); border: 1px solid #fff; box-shadow: 0 1.5cqi 4cqi rgba(11, 47, 87, 0.3); color: var(--inchiostro); font-size: 3.4cqi; line-height: 1.25; }
+.illu-telefono { display: flex; flex-direction: column; gap: 3cqi; padding: 5cqi 3.5cqi; border-radius: 7cqi; background: var(--blu-chiaro); border: 0.6cqi solid #c5d6ea; }
+.illu-vetro { display: flex; flex-direction: column; gap: 1.5cqi; padding: 3cqi 3.5cqi; border-radius: 3cqi; background: #fff; border: 1px solid var(--linea); box-shadow: 0 1.5cqi 4cqi rgba(11, 47, 87, 0.14); color: var(--inchiostro); font-size: 3.4cqi; line-height: 1.25; }
 .illu-piccolo { font-size: 2.9cqi; font-weight: 600; color: var(--grigio); }
 .illu-grande { font-size: 11cqi; font-weight: 700; line-height: 1; color: var(--blu); }
 .illu-riga { display: flex; align-items: center; gap: 1.5cqi; }
@@ -324,32 +324,33 @@ tr:last-child td { border-bottom: 0; }
 .illu .targa::after { width: 1.6cqi; }
 .illu-barra { height: 2cqi; border-radius: 999px; background: #dfe5ec; overflow: hidden; }
 .illu-barra::before { content: ""; display: block; width: 63%; height: 100%; background: var(--blu); }
-.illu-scintilla { width: 6cqi; height: 6cqi; fill: #cfe1f5; }
+.illu-scintilla { width: 6cqi; height: 6cqi; fill: var(--blu); opacity: 0.45; }
 .illu-scintilla + .illu-scintilla { width: 3.5cqi; height: 3.5cqi; }
 
-/* Posizioni in % del riquadro. Le mani toccano solo il bordo di vetro: sopra le schede bianche la linea bianca sparirebbe. */
-/* Home, in alto: il telefono con punti e revisione, una mano lo regge e l'altra tocca */
-.illu-home .illu-telefono { left: 30%; top: 7%; width: 44%; height: 104%; }
-.illu-home .mano-sorregge { left: -8%; bottom: -2%; width: 40%; }
-.illu-home .mano-tocca { right: -8%; top: -8%; width: 33%; }
-.illu-home .illu-scintilla { left: 9%; top: 13%; }
-.illu-home .illu-scintilla + .illu-scintilla { left: 17%; top: 27%; }
+/* Posizioni in % del riquadro (invisibile). */
+/* Home, in alto: il telefono con punti e revisione, la moto esce come una notifica, una mano tocca e l'altra regge */
+.illu-home .illu-telefono { left: 33%; top: 3%; width: 40%; height: 92%; }
+.illu-home .illu-notifica { left: 4%; top: 68%; width: 36%; }
+.illu-home .mano-tocca { right: 0; top: 0; width: 30%; }
+.illu-home .mano-sorregge { left: 50%; bottom: -12%; width: 40%; }
+.illu-home .illu-scintilla { left: 10%; top: 12%; }
+.illu-home .illu-scintilla + .illu-scintilla { left: 20%; top: 26%; }
 /* Home, controllo con la targa: la targa e la data, la mano indica la data */
-.illu-revisione .illu-vetro { left: 22%; width: 60%; }
-.illu-revisione .illu-targa { top: 12%; }
-.illu-revisione .illu-data { top: 41%; }
-.illu-revisione .mano-indica { left: 19%; bottom: -25%; width: 25%; }
-.illu-revisione .illu-scintilla { right: 8%; top: 9%; }
-.illu-revisione .illu-scintilla + .illu-scintilla { right: 4%; top: 22%; }
-/* Accesso: riquadro piccolo, quindi pochi elementi e più grandi */
+.illu-revisione .illu-vetro { left: 26%; width: 66%; }
+.illu-revisione .illu-targa { top: 4%; }
+.illu-revisione .illu-data { top: 36%; }
+.illu-revisione .mano-indica { left: 22.8%; bottom: -2.8%; width: 20%; }
+.illu-revisione .illu-scintilla { left: 8%; top: 14%; }
+.illu-revisione .illu-scintilla + .illu-scintilla { left: 16%; top: 28%; }
+/* Accesso: illustrazione piccola, quindi pochi elementi e più grandi */
 .illu-accesso .illu-vetro { gap: 3cqi; padding: 5cqi; border-radius: 4cqi; font-size: 5cqi; }
 .illu-accesso .illu-piccolo { font-size: 4.6cqi; }
 .illu-accesso .icona { width: 9cqi; height: 9cqi; }
-.illu-accesso .illu-carta { left: 6%; top: 12%; width: 45%; }
-.illu-accesso .illu-telefono { left: 57%; top: 8%; width: 37%; height: 104%; padding: 3.5cqi; }
-.illu-accesso .mano-sorregge { left: 18%; bottom: -10%; width: 40%; }
-.illu-accesso .illu-scintilla { left: 3%; top: 62%; }
-.illu-accesso .illu-scintilla + .illu-scintilla { left: 8%; top: 76%; }
+.illu-accesso .illu-carta { left: 2%; top: 8%; width: 50%; }
+.illu-accesso .illu-telefono { left: 56%; top: 3%; width: 40%; height: 92%; padding: 3.5cqi; }
+.illu-accesso .mano-sorregge { left: 22%; bottom: 0; width: 42%; }
+.illu-accesso .illu-scintilla { left: 4%; top: 70%; }
+.illu-accesso .illu-scintilla + .illu-scintilla { left: 11%; top: 82%; }
 .illu-accesso .illu-righe { gap: 3cqi; }
 .illu-accesso .illu-linea { height: 2.6cqi; }
 .illu-foto { width: 11cqi; height: 13cqi; border-radius: 1.5cqi; background: var(--blu-chiaro); }
