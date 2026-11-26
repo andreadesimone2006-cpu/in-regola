@@ -493,7 +493,7 @@
     const P = DATI.punti;
     const pieno = document.querySelector('.scala-pieno');
     pieno.style.width = (P.saldo / P.massimo * 100) + '%';
-    document.querySelector('.scala-tacca').style.left = (P.partenza / P.massimo * 100) + '%';
+    document.querySelector('.scala-tacca').style.width = (P.partenza / P.massimo * 100) + '%';
     document.querySelector('.scala').setAttribute('aria-label', `${P.saldo} punti su un massimo di ${P.massimo}. Si parte da ${P.partenza}.`);
 
     document.getElementById('lista-storico').innerHTML = P.storico.map(x => {
