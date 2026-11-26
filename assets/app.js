@@ -113,10 +113,12 @@
     '<path d="m127 294 16 36m20 47 17 39m20 48 17 39m20 48 17 40m20 48 17 39M315 719q18 12 34-4m20-42 16-39m20-49 16-39m21-50 16-39m21-53 16-39m20-51q9-21 28-29m47-7q24 0 39 14m21 44v43m0 48v43m0 49v43m0 48v43m20 44q15 17 38 17m52 0h43m52 0h43" stroke="#0059b3" stroke-width="19"/></g></svg>';
 
   /* ---------- Testata, menu e barra in basso ---------- */
+  // La pagina cruscotto si chiama "Riepilogo" ovunque: menu, barra in basso e briciole
   const MENU = [
     ['index.html', 'casa', 'Home', 'home'],
+    ...(sessione ? [['cruscotto.html', 'cruscotto', 'Riepilogo', 'cruscotto']] : []),
     ['punti.html', 'patente', 'Quanti punti ho', 'punti'],
-    ['cruscotto.html#scadenze', 'calendario', 'Le mie scadenze', 'cruscotto'],
+    ['cruscotto.html#scadenze', 'calendario', 'Le mie scadenze', ''],
     ['veicolo.html', 'auto', 'I miei veicoli', 'veicolo'],
     ['index.html#revisione', 'cerca', 'Controlla una revisione con la targa', ''],
     ['index.html#servizi', 'menu', 'Tutti i servizi', '']
@@ -135,14 +137,15 @@
 
   const testata =
     '<a class="salta" href="#contenuto">Vai al contenuto</a>' +
-    '<div class="fascia"><div class="contenitore"><p>Progetto d\'esame UX/UI: non è un sito ufficiale. I dati sono di esempio.</p>' +
+    '<div class="fascia"><div class="contenitore"><p><span class="fascia-breve">Progetto d\'esame, non ufficiale. Dati di esempio.</span>' +
+      '<span class="fascia-lunga">Progetto d\'esame UX/UI: non è un sito ufficiale. I dati sono di esempio.</span></p>' +
       '<nav class="fascia-pro" aria-label="Accesso per i professionisti"><span>Accesso dedicato:</span>' +
       PRO.map(p => `<a href="${p[0]}">${p[3]}</a>`).join('') + '</nav></div></div>' +
     '<header class="testata"><div class="contenitore testata-riga">' +
       `<a class="logo" href="index.html">${LOGO}<span>ViaLibera</span></a>` +
       '<div class="testata-azioni">' +
         (sessione
-          ? `<a class="btn-testata solo-largo" href="cruscotto.html">${ico('utente')}${DATI.nome}</a><button class="btn-testata" type="button" data-esci>${ico('esci')}Esci</button>`
+          ? `<a class="btn-testata solo-largo" href="cruscotto.html">${ico('utente')}<span class="vh">Riepilogo di </span>${DATI.nome}</a><button class="btn-testata" type="button" data-esci>${ico('esci')}Esci</button>`
           : `<a class="btn-testata" href="accesso.html">${ico('lucchetto')}Entra</a>`) +
         `<button class="btn-testata btn-menu" type="button" aria-expanded="false" aria-controls="menu">${ico('menu')}<span>Menu</span></button>` +
       '</div></div>' +
@@ -191,15 +194,21 @@
     b.setAttribute('aria-labelledby', 'cookie-t');
     b.innerHTML = '<div class="contenitore">' +
       '<h2 id="cookie-t" tabindex="-1">Scegli quali cookie usare</h2>' +
-      '<p>Usiamo cookie tecnici, necessari per farti entrare e ricordare le tue scelte. Se sei d\'accordo, useremo anche cookie di statistica anonimi, per capire quali pagine sono difficili da usare. Niente pubblicità. <a href="privacy.html#cookie">Leggi i dettagli</a></p>' +
+      // Banner basso: testo breve, Accetta e Rifiuta affiancati e con lo stesso peso, "Scegli tu" come link
+      '<p>Usiamo cookie tecnici e, se vuoi, cookie di statistica anonimi. Niente pubblicità.</p>' +
       `<div class="cookie-scelte"${dettagli ? '' : ' hidden'}>` +
         '<label class="spunta"><input type="checkbox" checked disabled><span><strong>Tecnici</strong><br><span class="aiuto">Sempre attivi: senza questi il sito non funziona.</span></span></label>' +
         `<label class="spunta"><input type="checkbox" id="ck-stat"${c && c.statistiche ? ' checked' : ''}><span><strong>Statistiche</strong><br><span class="aiuto">Facoltativi: contano le visite in forma anonima.</span></span></label>` +
       '</div>' +
-      '<div class="bottoni">' +
-        '<button type="button" class="btn btn-primario" data-c="tutti">Accetta tutti</button>' +
-        '<button type="button" class="btn btn-primario" data-c="necessari">Rifiuta i facoltativi</button>' +
-        `<button type="button" class="btn btn-secondario" data-c="${dettagli ? 'salva' : 'scegli'}">${dettagli ? 'Salva le mie scelte' : 'Scegli tu'}</button>` +
+      '<div class="cookie-bottoni">' +
+        '<button type="button" class="btn btn-primario" data-c="tutti">Accetta</button>' +
+        '<button type="button" class="btn btn-primario" data-c="necessari">Rifiuta</button>' +
+      '</div>' +
+      '<div class="cookie-altro">' +
+        (dettagli
+          ? '<button type="button" class="btn btn-secondario" data-c="salva">Salva le mie scelte</button>'
+          : '<button type="button" class="btn-testo" data-c="scegli">Scegli tu</button>') +
+        '<a href="privacy.html#cookie">Leggi i dettagli</a>' +
       '</div>' +
       `<button type="button" class="cookie-chiudi" data-c="necessari" aria-label="Chiudi e usa solo i cookie tecnici">${ico('chiudi')}</button>` +
     '</div>';
@@ -212,6 +221,7 @@
       if (azione === 'scegli') {
         b.querySelector('.cookie-scelte').hidden = false;
         t.dataset.c = 'salva';
+        t.className = 'btn btn-secondario';
         t.textContent = 'Salva le mie scelte';
         b.querySelector('#ck-stat').focus();
         return;
@@ -264,7 +274,7 @@
       conPdf(() => {
         try {
           creaPdf(nomeFile, titolo, righe);
-          esito.replaceChildren(avviso('ok', `File scaricato: ${nomeFile}`, 'Lo trovi nella cartella Download del telefono o del computer.'));
+          esito.replaceChildren(avviso('ok', `File pronto: ${nomeFile}`, 'Se non si è aperto da solo, lo trovi tra i download del browser.'));
         } catch (e) { errore(); return; }
         btn.disabled = false;
       }, errore);
@@ -302,14 +312,21 @@
   ];
 
   function initHome() {
-    document.getElementById('servizi-lista').innerHTML = SERVIZI.map(([titolo, icona, voci]) =>
-      `<div class="gruppo"><h3>${ico(icona)}${titolo}</h3><ul>` +
-      voci.map(([nome, href, acc]) => href
-        ? `<li><a class="servizio" href="${href}"><span class="servizio-testo"><span class="servizio-nome">${nome}</span>` +
-          `<span class="servizio-accesso">${ico(acc[0])}${acc[1]}</span></span>${ico('avanti')}</a></li>`
-        : `<li><div class="servizio servizio-spento"><span class="servizio-testo"><span class="servizio-nome">${nome}</span>` +
-          '<span class="servizio-accesso">Non attivo in questo prototipo</span></span></div></li>').join('') +
-      '</ul></div>').join('');
+    // Telefono: gruppi chiusi, così la Home non si allunga. Da 48rem aperti: è la panoramica di tutto il portale.
+    // I servizi non attivi stanno in una riga sola in fondo al gruppo.
+    const aperti = matchMedia('(min-width: 48rem)').matches ? ' open' : '';
+    const elenco = new Intl.ListFormat('it', { type: 'conjunction' });
+    document.getElementById('servizi-lista').innerHTML = SERVIZI.map(([titolo, icona, voci]) => {
+      const attivi = voci.filter(v => v[1]);
+      const spenti = voci.filter(v => !v[1]).map(v => `«${v[0]}»`);
+      return `<details class="gruppo"${aperti}><summary><h3>${ico(icona)}${titolo}` +
+        `<span class="gruppo-conta">${attivi.length} ${attivi.length === 1 ? 'servizio' : 'servizi'}</span></h3>${ico('avanti')}</summary><ul>` +
+        attivi.map(([nome, href, acc]) =>
+          `<li><a class="servizio" href="${href}"><span class="servizio-testo"><span class="servizio-nome">${nome}</span>` +
+          `<span class="servizio-accesso">${ico(acc[0])}${acc[1]}</span></span>${ico('avanti')}</a></li>`).join('') + '</ul>' +
+        (spenti.length ? `<p class="in-arrivo">Non ancora attivi in questo prototipo: ${elenco.format(spenti)}.</p>` : '') +
+        '</details>';
+    }).join('');
 
     const form = document.getElementById('form-targa');
     const input = document.getElementById('targa');
@@ -350,6 +367,10 @@
         `<p>Ultima revisione: ${lunga(r.ultima)}, esito ${r.esito.toLowerCase()}, ${r.km}.</p>` +
         `<p>Per vedere tutti i dati del veicolo e scaricare la ricevuta, <a href="veicolo.html?targa=${veicolo.targa}">entra nella tua area</a>.</p>` +
       '</div>';
+      // Sul telefono la tastiera resterebbe aperta e coprirebbe il risultato: la chiudiamo e portiamo il risultato in cima
+      const touch = matchMedia('(pointer: coarse)').matches;
+      if (touch) input.blur();
+      esito.scrollIntoView({ block: touch ? 'start' : 'nearest' });
     });
   }
 
@@ -405,7 +426,12 @@
 
     const pre = params.get('metodo');
     if (pre === 'spid' || pre === 'cie') form.querySelector(`input[value="${pre}"]`).checked = true;
-    const aggiorna = () => { boxGestore.hidden = metodo() !== 'spid'; };
+    // "Cosa serve" mostra solo il metodo scelto; se non è scelto, tutti e due
+    const aggiorna = () => {
+      const m = metodo();
+      boxGestore.hidden = m !== 'spid';
+      cosaServe.querySelectorAll('[data-metodo]').forEach(p => { p.hidden = !!m && p.dataset.metodo !== m; });
+    };
     aggiorna();
     radio.forEach(r => r.addEventListener('change', () => { aggiorna(); pulisciErrore('metodo'); }));
     gestore.addEventListener('change', () => pulisciErrore('gestore'));
@@ -429,7 +455,6 @@
         document.getElementById('testo-passo-2').textContent = 'In un servizio vero qui apri l\'app CieID, appoggi la carta sul retro del telefono e scrivi il PIN di 8 cifre.';
       }
       form.hidden = true;
-      cosaServe.hidden = true;
       passo2.hidden = false;
       titolo.focus();
     });
@@ -437,8 +462,8 @@
     document.getElementById('annulla').addEventListener('click', () => {
       passo2.hidden = true;
       form.hidden = false;
-      cosaServe.hidden = false;
-      const a = avviso('errore', 'Accesso non completato.', 'Hai annullato sul sito del gestore, quindi non sei entrato. Non è cambiato nulla e non hai pagato niente. Per riprovare premi “Continua”.');
+      // Annullare è una scelta, non un errore: avviso informativo blu
+      const a = avviso('info', 'Accesso non completato.', 'Hai annullato sul sito del gestore, quindi non sei entrato. Non è cambiato nulla e non hai pagato niente. Per riprovare premi “Continua”.');
       erroreAccesso.replaceChildren(a);
       a.focus();
     });

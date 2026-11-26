@@ -7,13 +7,15 @@
 <meta name="description" content="Entra nella tua area con SPID o con la Carta d'identità elettronica. Progetto didattico, accesso simulato.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#0b2f57">
-<link rel="icon" href="favicon.svg?v=15" type="image/svg+xml">
+<link rel="icon" href="favicon.svg?v=16" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/titillium-web-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/style.css?v=15">
+<link rel="preload" href="assets/fonts/titillium-web-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/style.css?v=16">
 </head>
 <body data-pagina="accesso">
 <div id="testata"></div>
-<script src="assets/app.js?v=15"></script>
+<noscript><div class="fascia"><div class="contenitore"><p>Progetto d'esame UX/UI: non è un sito ufficiale. I dati sono di esempio. Per usare i servizi attiva JavaScript nel browser. <a href="index.html">Home</a> · <a href="privacy.html">Privacy e cookie</a></p></div></div></noscript>
+<script src="assets/app.js?v=16"></script>
 
 <main id="contenuto" tabindex="-1">
   <div class="contenitore stretto pila">
@@ -36,10 +38,10 @@
         <div class="illu-telefono">
           <div class="illu-vetro">
             <svg class="icona"><use href="#i-lucchetto"></use></svg>
-            <span class="illu-bottone">Entra</span>
+            <span class="illu-righe"><span class="illu-linea"></span><span class="illu-linea"></span></span>
           </div>
         </div>
-        <img class="mano-sorregge" src="assets/illustrazioni/mano-sorregge.svg?v=15" alt="">
+        <img class="mano-sorregge" src="assets/illustrazioni/mano-sorregge.svg?v=16" alt="">
       </div>
     </div>
 
@@ -58,32 +60,7 @@
     </div>
 
     <div id="percorso" class="pila">
-      <section id="cosa-serve" class="pila-s" aria-labelledby="t-serve">
-        <h2 id="t-serve">Prima di cominciare, tieni a portata di mano</h2>
-        <div class="opzioni">
-          <div class="pannello pila-xs">
-            <h3>Se entri con SPID</h3>
-            <ul class="puntato">
-              <li>Nome utente e password di SPID</li>
-              <li>Il telefono, per confermare con l'app del gestore o con il codice via SMS</li>
-            </ul>
-          </div>
-          <div class="pannello pila-xs">
-            <h3>Se entri con la CIE</h3>
-            <ul class="puntato">
-              <li>La Carta d'identità elettronica</li>
-              <li>Il PIN di 8 cifre: le prime 4 sono sulla ricevuta del Comune, le ultime 4 nella lettera arrivata con la carta</li>
-              <li>Uno smartphone con NFC e l'app CieID</li>
-            </ul>
-          </div>
-        </div>
-        <p class="rassicura"><svg class="icona" aria-hidden="true" focusable="false"><use href="#i-lucchetto"></use></svg>Entrare è gratis e non comporta pagamenti.</p>
-        <details>
-          <summary><svg class="icona" aria-hidden="true" focusable="false"><use href="#i-avanti"></use></svg>Non hai né SPID né la CIE?</summary>
-          <p>SPID si chiede a uno dei gestori riconosciuti, online o di persona, con un documento d'identità e la tessera sanitaria. La CIE si chiede in Comune. Se ti serve aiuto, chiama il numero verde che trovi in fondo alla pagina.</p>
-        </details>
-      </section>
-
+      <!-- Il modulo viene subito dopo il titolo; "cosa serve" mostra solo il metodo scelto (tutti e due se non è scelto) -->
       <form id="form-accesso" class="pila-m" novalidate>
         <div id="errore-accesso"></div>
         <p class="passo">Passo 1 di 2</p>
@@ -97,6 +74,27 @@
             </div>
           </fieldset>
         </div>
+        <section id="cosa-serve" class="pila-s" aria-labelledby="t-serve">
+          <h3 id="t-serve">Prima di cominciare, tieni a portata di mano</h3>
+          <div class="opzioni">
+            <div class="pannello pila-xs" data-metodo="spid">
+              <p><strong>Se entri con SPID</strong></p>
+              <ul class="puntato">
+                <li>Nome utente e password di SPID</li>
+                <li>Il telefono, per confermare con l'app del gestore o con il codice via SMS</li>
+              </ul>
+            </div>
+            <div class="pannello pila-xs" data-metodo="cie">
+              <p><strong>Se entri con la CIE</strong></p>
+              <ul class="puntato">
+                <li>La Carta d'identità elettronica</li>
+                <li>Il PIN di 8 cifre: le prime 4 sono sulla ricevuta del Comune, le ultime 4 nella lettera arrivata con la carta</li>
+                <li>Uno smartphone con NFC e l'app CieID</li>
+              </ul>
+            </div>
+          </div>
+          <p class="rassicura"><svg class="icona" aria-hidden="true" focusable="false"><use href="#i-lucchetto"></use></svg>Entrare è gratis e non comporta pagamenti.</p>
+        </section>
         <div class="campo" id="campo-gestore" hidden>
           <label for="gestore">Chi ti ha dato SPID?</label>
           <p class="aiuto" id="gestore-aiuto">È l'azienda che hai scelto quando hai attivato SPID. In questo prototipo i nomi sono di fantasia.</p>
@@ -114,6 +112,10 @@
           </details>
         </div>
         <div class="bottoni"><button class="btn btn-primario" type="submit">Continua</button></div>
+        <details>
+          <summary><svg class="icona" aria-hidden="true" focusable="false"><use href="#i-avanti"></use></svg>Non hai né SPID né la CIE?</summary>
+          <p>SPID si chiede a uno dei gestori riconosciuti, online o di persona, con un documento d'identità e la tessera sanitaria. La CIE si chiede in Comune. Se ti serve aiuto, chiama il numero verde che trovi in fondo alla pagina.</p>
+        </details>
       </form>
 
       <section id="passo-2" class="pila-m" aria-labelledby="titolo-passo-2" hidden>

@@ -69,7 +69,9 @@ main { padding-block: 1.5rem 3.5rem; }
 
 /* Fascia del progetto (in alto) */
 .fascia { background: var(--inchiostro); color: #fff; font-size: 1rem; }
-.fascia .contenitore { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.25rem 1rem; padding-block: 0.4rem; min-height: 2.5rem; }
+.fascia .contenitore { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.25rem 2.5rem; padding-block: 0.4rem; min-height: 2.5rem; }
+/* Sul telefono la frase corta sta su una riga; quella completa è anche nel piede */
+.fascia-lunga { display: none; }
 .fascia-pro a, .fascia-pro span { white-space: nowrap; }
 .fascia a { color: #fff; }
 .fascia-pro { display: none; gap: 1.25rem; align-items: center; }
@@ -170,8 +172,8 @@ legend { padding: 0; margin-bottom: 0.75rem; }
 details { border-block: 1px solid var(--linea); }
 summary { display: flex; align-items: center; gap: 0.5rem; min-height: 3.25rem; padding-block: 0.5rem; color: var(--blu); font-weight: 600; cursor: pointer; list-style: none; }
 summary::-webkit-details-marker { display: none; }
-summary .icona { transition: transform 0.15s; }
-details[open] summary .icona { transform: rotate(90deg); }
+summary > .icona { transition: transform 0.15s; }
+details[open] summary > .icona { transform: rotate(90deg); }
 details > :not(summary) { padding-bottom: 1rem; }
 .passo { color: var(--grigio); font-weight: 600; font-size: 1rem; }
 
@@ -191,9 +193,16 @@ details > :not(summary) { padding-bottom: 1rem; }
 .azione .aiuto { display: block; margin-top: 0.15rem; }
 .azione-icona { width: 3rem; height: 3rem; flex: none; display: grid; place-items: center; border-radius: 50%; background: var(--blu-chiaro); color: var(--blu); }
 .azione > .icona:last-child { margin-left: auto; color: var(--blu); }
-.servizi { display: grid; gap: 2rem; }
-.gruppo h3 { display: flex; align-items: center; gap: 0.6rem; padding-bottom: 0.6rem; border-bottom: 2px solid var(--blu-notte); }
+.servizi { display: grid; gap: 1rem; }
+/* Ogni gruppo è richiudibile: chiuso sul telefono, aperto da 48rem (lo decide app.js) */
+.gruppo { border: 0; }
+.gruppo > summary { gap: 0.6rem; padding-block: 0.5rem 0.6rem; color: var(--inchiostro); border-bottom: 2px solid var(--blu-notte); }
+.gruppo > summary > .icona { margin-left: auto; color: var(--blu); }
+.gruppo > :not(summary) { padding-bottom: 0; }
+.gruppo h3 { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 0.6rem; }
 .gruppo h3 .icona { color: var(--blu); }
+.gruppo-conta { font-size: 1rem; font-weight: 400; color: var(--grigio); }
+.in-arrivo { padding-top: 0.75rem; font-size: 1rem; color: var(--grigio); }
 .gruppo ul { list-style: none; padding: 0; }
 .gruppo li { border-bottom: 1px solid var(--linea); }
 .servizio { display: flex; align-items: center; gap: 0.75rem; min-height: 3.75rem; padding-block: 0.6rem; color: var(--inchiostro); text-decoration: none; }
@@ -204,7 +213,6 @@ a.servizio .servizio-nome { color: var(--blu); }
 a.servizio > .icona:last-child { margin-left: auto; color: var(--blu); }
 .servizio-accesso { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 1rem; color: var(--grigio); }
 .servizio-accesso .icona { width: 1.1rem; height: 1.1rem; }
-.servizio-spento .servizio-nome { color: var(--grigio); }
 .esito { margin-top: 0.5rem; }
 /* Link dentro avvisi, scadenze ed esiti: area di tocco alta 44px senza spostare le righe di testo */
 .avviso-corpo a, .scadenze a, .esito a { padding-block: 0.55rem; }
@@ -254,6 +262,8 @@ a.servizio > .icona:last-child { margin-left: auto; color: var(--blu); }
 .variazione-meno { color: var(--rosso); }
 .variazione-piu { color: var(--verde); }
 .opzioni { display: grid; gap: 1rem; }
+/* Accesso: se resta un solo metodo, la sua scheda prende tutta la larghezza */
+#cosa-serve .opzioni { grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr)); }
 
 /* Veicolo */
 .scelta-veicolo { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; padding: 0; }
@@ -287,9 +297,12 @@ tr:last-child td { border-bottom: 0; }
 .tabella-scorri td:first-child { white-space: nowrap; }
 
 /* Banner cookie */
-.cookie { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; max-height: 88vh; overflow-y: auto; background: var(--carta); border-top: 4px solid var(--blu-notte); box-shadow: 0 -8px 28px rgba(11, 47, 87, 0.2); padding-block: 1.25rem calc(1.25rem + env(safe-area-inset-bottom, 0px)); }
-.cookie .contenitore { position: relative; max-width: 58rem; display: flex; flex-direction: column; gap: 1rem; }
+.cookie { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; max-height: 88vh; overflow-y: auto; background: var(--carta); border-top: 4px solid var(--blu-notte); box-shadow: 0 -8px 28px rgba(11, 47, 87, 0.2); padding-block: 1rem calc(0.5rem + env(safe-area-inset-bottom, 0px)); }
+.cookie .contenitore { position: relative; max-width: 58rem; display: flex; flex-direction: column; gap: 0.75rem; }
 .cookie h2 { font-size: 1.375rem; padding-right: 3rem; }
+.cookie-bottoni { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; max-width: 26rem; }
+.cookie-altro { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 1.5rem; }
+.cookie-altro a { display: inline-flex; align-items: center; min-height: 3rem; }
 .cookie-chiudi { position: absolute; top: -0.6rem; right: max(4px, env(safe-area-inset-right, 0px)); width: 3rem; height: 3rem; display: grid; place-items: center; background: none; border: 0; border-radius: var(--r); color: var(--inchiostro); cursor: pointer; }
 .cookie-scelte { display: grid; gap: 0.9rem; padding: 1rem; background: var(--sfondo); border-radius: var(--r); }
 
@@ -318,11 +331,12 @@ tr:last-child td { border-bottom: 0; }
 .illu-telefono { display: flex; flex-direction: column; gap: 3cqi; padding: 5cqi 3.5cqi; border-radius: 7cqi; background: var(--blu-chiaro); border: 0.6cqi solid #c5d6ea; }
 .illu-vetro { display: flex; flex-direction: column; gap: 1.5cqi; padding: 3cqi 3.5cqi; border-radius: 3cqi; background: #fff; border: 1px solid var(--linea); box-shadow: 0 1.5cqi 4cqi rgba(11, 47, 87, 0.14); color: var(--inchiostro); font-size: 3.4cqi; line-height: 1.25; }
 .illu-piccolo { font-size: 2.9cqi; font-weight: 600; color: var(--grigio); }
-.illu-grande { font-size: 11cqi; font-weight: 700; line-height: 1; color: var(--blu); }
+/* Niente dati veri né comandi nei disegni: icone, righe grigie e una barra, così nessuno li scambia per i propri dati o per un pulsante */
 .illu-riga { display: flex; align-items: center; gap: 1.5cqi; }
+.illu-riga > .illu-linea { flex: 1; }
+.illu-blocco { width: 40%; height: 7cqi; border-radius: 1.2cqi; background: var(--blu-chiaro); }
 .illu .icona { width: 4.5cqi; height: 4.5cqi; color: var(--blu); }
-.illu .stato { align-self: flex-start; gap: 1cqi; padding: 0.3cqi 2cqi 0.3cqi 1.3cqi; font-size: 2.9cqi; }
-.illu .stato .icona { width: 3.4cqi; height: 3.4cqi; color: inherit; }
+.illu-notifica .icona { color: var(--verde); }
 .illu .targa { align-self: flex-start; border-width: 0.5cqi; border-radius: 1.2cqi; }
 .illu .targa-testo { font-size: 6.5cqi; padding: 1.2cqi 2.2cqi; }
 .illu .targa-i { font-size: 2.6cqi; padding: 1.2cqi 1cqi 1cqi; }
@@ -363,7 +377,6 @@ tr:last-child td { border-bottom: 0; }
 .illu-righe { flex: 1; display: flex; flex-direction: column; gap: 1.8cqi; }
 .illu-linea { height: 1.6cqi; border-radius: 999px; background: #d3dae3; }
 .illu-linea:last-child { width: 60%; }
-.illu-bottone { padding: 1.6cqi; border-radius: 1.2cqi; background: var(--blu); color: #fff; font-weight: 600; text-align: center; }
 
 /* Telefoni stretti: i pulsanti della testata restano con la parola, senza icona */
 @media (max-width: 25.99rem) {
@@ -386,16 +399,26 @@ tr:last-child td { border-bottom: 0; }
   .piede-griglia { grid-template-columns: 1.4fr 1fr 1fr; }
 }
 
-/* Telefono: l'illustrazione della Home scende sotto le azioni, che restano in cima allo schermo */
+/* Telefono: prima azioni, accesso e controllo con la targa; l'illustrazione della Home scende dopo.
+   I disegni del controllo targa e dell'accesso spariscono: occupano spazio senza aggiungere informazioni. */
 @media (max-width: 47.99rem) {
   .home-apertura { display: contents; }
   .illu-home { order: 1; }
   .home-griglia ~ * { order: 2; }
-  .illu-accesso { margin-top: 1.5rem; max-width: 17rem; }
+  .home-griglia ~ #revisione { order: 0; }
+  .illu-revisione, .illu-accesso { display: none; }
+}
+/* Riepilogo: lo stato di ogni scadenza sta sempre sotto il testo */
+@media (max-width: 39.99rem) {
+  .scadenze li { flex-direction: column; align-items: flex-start; }
 }
 
 @media (min-width: 48rem) {
+  .fascia-breve { display: none; }
+  .fascia-lunga { display: inline; }
   .con-illu { display: grid; grid-template-columns: 1fr clamp(14rem, 34%, 24rem); gap: 2.5rem; align-items: start; }
+  /* Home: testo centrato in altezza accanto all'illustrazione, senza un vuoto sotto */
+  .home-apertura { align-items: center; }
   .stretto .con-illu { grid-template-columns: 1fr 17rem; }
   /* Controllo con la targa: sul telefono l'illustrazione sta tra testo e modulo, qui va a destra */
   #revisione { gap: 1rem 2.5rem; }
@@ -416,7 +439,7 @@ tr:last-child td { border-bottom: 0; }
   .btn-menu { display: none; }
   .menu:not(.aperto) { display: block; }
   .menu .contenitore { flex-direction: row; padding-block: 0; }
-  .menu .menu-cittadino { display: flex; flex-wrap: wrap; column-gap: 2rem; }
+  .menu .menu-cittadino { display: flex; flex-wrap: wrap; column-gap: 1.5rem; }
   .menu li + li { border-top: 0; }
   .menu a { min-height: 3.5rem; border-bottom: 4px solid transparent; padding-top: 4px; }
   .menu a[aria-current="page"] { border-bottom-color: var(--blu); }

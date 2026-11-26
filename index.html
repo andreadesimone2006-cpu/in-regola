@@ -7,13 +7,15 @@
 <meta name="description" content="Controlla i punti della patente, la revisione e le scadenze dei tuoi veicoli. Progetto didattico, dati di esempio.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#0b2f57">
-<link rel="icon" href="favicon.svg?v=15" type="image/svg+xml">
+<link rel="icon" href="favicon.svg?v=16" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/titillium-web-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/style.css?v=15">
+<link rel="preload" href="assets/fonts/titillium-web-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/style.css?v=16">
 </head>
 <body data-pagina="home">
 <div id="testata"></div>
-<script src="assets/app.js?v=15"></script>
+<noscript><div class="fascia"><div class="contenitore"><p>Progetto d'esame UX/UI: non è un sito ufficiale. I dati sono di esempio. Per usare i servizi attiva JavaScript nel browser. <a href="index.html">Home</a> · <a href="privacy.html">Privacy e cookie</a></p></div></div></noscript>
+<script src="assets/app.js?v=16"></script>
 
 <main id="contenuto" tabindex="-1">
   <div class="contenitore pila">
@@ -28,21 +30,20 @@
         <svg class="illu-scintilla" viewBox="0 0 24 24"><path d="M12 0c1 7 5 11 12 12-7 1-11 5-12 12-1-7-5-11-12-12 7-1 11-5 12-12z"/></svg>
         <div class="illu-telefono">
           <div class="illu-vetro">
-            <span class="illu-piccolo">Punti patente</span>
-            <span><span class="illu-grande">19</span> su 30</span>
+            <span class="illu-riga"><svg class="icona"><use href="#i-patente"></use></svg><span class="illu-linea"></span></span>
+            <span class="illu-blocco"></span>
             <span class="illu-barra"></span>
           </div>
           <div class="illu-vetro">
-            <span class="illu-riga"><svg class="icona"><use href="#i-auto"></use></svg><strong>Fiat Panda</strong></span>
-            <span class="illu-piccolo">Revisione entro il 31/12/2026</span>
+            <span class="illu-riga"><svg class="icona"><use href="#i-auto"></use></svg><span class="illu-linea"></span></span>
+            <span class="illu-righe"><span class="illu-linea"></span><span class="illu-linea"></span></span>
           </div>
         </div>
         <div class="illu-vetro illu-notifica">
-          <span class="illu-riga"><svg class="icona"><use href="#i-auto"></use></svg><strong>Liberty 125</strong></span>
-          <span class="stato stato-ok"><svg class="icona"><use href="#i-spunta"></use></svg>In regola</span>
+          <span class="illu-riga"><svg class="icona"><use href="#i-spunta"></use></svg><span class="illu-righe"><span class="illu-linea"></span><span class="illu-linea"></span></span></span>
         </div>
-        <img class="mano-sorregge" src="assets/illustrazioni/mano-sorregge.svg?v=15" alt="">
-        <img class="mano-tocca" src="assets/illustrazioni/mano-tocca.svg?v=15" alt="">
+        <img class="mano-sorregge" src="assets/illustrazioni/mano-sorregge.svg?v=16" alt="">
+        <img class="mano-tocca" src="assets/illustrazioni/mano-tocca.svg?v=16" alt="">
       </div>
     </div>
 
@@ -76,8 +77,8 @@
           <div class="bottoni">
             <a class="btn btn-primario" href="accesso.html?metodo=spid">Entra con SPID</a>
             <a class="btn btn-primario" href="accesso.html?metodo=cie">Entra con la CIE</a>
+            <a class="btn btn-secondario" href="accesso.html#cosa-serve">Cosa serve per entrare</a>
           </div>
-          <p class="aiuto">Prima di cominciare ti diciamo cosa tenere a portata di mano. <a href="accesso.html#cosa-serve">Cosa serve per entrare</a></p>
         </div>
         <div class="pila-s" data-se="utente" hidden>
           <h2>Sei nella tua area</h2>
@@ -86,12 +87,6 @@
         </div>
       </section>
     </div>
-
-    <section id="servizi" class="pila-s" aria-labelledby="t-servizi">
-      <h2 id="t-servizi">Tutti i servizi</h2>
-      <p class="testo">Tutto quello che puoi fare qui, diviso per argomento. Accanto a ogni servizio trovi cosa ti serve per usarlo.</p>
-      <div id="servizi-lista" class="servizi"></div>
-    </section>
 
     <section id="revisione" class="pila-s con-illu" aria-labelledby="t-revisione">
       <h2 id="t-revisione">Controlla la revisione con la targa</h2>
@@ -107,7 +102,7 @@
           <span class="illu-riga"><svg class="icona"><use href="#i-calendario"></use></svg><span class="illu-piccolo">Prossima revisione</span></span>
           <strong>Entro il 31 dicembre 2026</strong>
         </div>
-        <img class="mano-indica" src="assets/illustrazioni/mano-indica.svg?v=15" alt="">
+        <img class="mano-indica" src="assets/illustrazioni/mano-indica.svg?v=16" alt="">
       </div>
       <form id="form-targa" class="pila-s" novalidate>
         <div class="campo">
@@ -119,6 +114,12 @@
         <div class="bottoni"><button class="btn btn-primario" type="submit">Controlla la revisione</button></div>
       </form>
       <div id="esito-targa" class="esito" aria-live="polite"></div>
+    </section>
+
+    <section id="servizi" class="pila-s" aria-labelledby="t-servizi">
+      <h2 id="t-servizi">Tutti i servizi</h2>
+      <p class="testo">Tutto quello che puoi fare qui, diviso per argomento. Accanto a ogni servizio trovi cosa ti serve per usarlo.</p>
+      <div id="servizi-lista" class="servizi"></div>
     </section>
 
     <div class="avviso avviso-info">
