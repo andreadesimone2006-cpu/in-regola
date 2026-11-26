@@ -385,7 +385,7 @@ tr:last-child td { border-bottom: 0; }
   .home-apertura { display: contents; }
   .illu-home { order: 1; }
   .home-griglia ~ * { order: 2; }
-  .illu-accesso { margin-top: 1.5rem; }
+  .illu-accesso { margin-top: 1.5rem; max-width: 17rem; }
 }
 
 @media (min-width: 48rem) {
