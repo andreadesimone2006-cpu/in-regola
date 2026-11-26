@@ -7,13 +7,13 @@
 <meta name="description" content="Entra nella tua area con SPID o con la Carta d'identità elettronica. Progetto didattico, accesso simulato.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#0b2f57">
-<link rel="icon" href="favicon.svg?v=9" type="image/svg+xml">
+<link rel="icon" href="favicon.svg?v=10" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/titillium-web-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/style.css?v=9">
+<link rel="stylesheet" href="assets/style.css?v=10">
 </head>
 <body data-pagina="accesso">
 <div id="testata"></div>
-<script src="assets/app.js?v=9"></script>
+<script src="assets/app.js?v=10"></script>
 
 <main id="contenuto" tabindex="-1">
   <div class="contenitore stretto pila">
@@ -21,9 +21,26 @@
       <ol><li><a href="index.html">Home</a></li><li aria-current="page" id="briciola-accesso">Entra</li></ol>
     </nav>
 
-    <div class="pila-s">
-      <h1 id="titolo-accesso">Entra con SPID o CIE</h1>
-      <p class="intro" id="destinazione">Dopo l'accesso vedi in una sola pagina punti, scadenze e veicoli.</p>
+    <div class="con-illu">
+      <div class="pila-s">
+        <h1 id="titolo-accesso">Entra con SPID o CIE</h1>
+        <p class="intro" id="destinazione">Dopo l'accesso vedi in una sola pagina punti, scadenze e veicoli.</p>
+      </div>
+      <div class="illu illu-accesso" aria-hidden="true">
+        <svg class="illu-scintilla" viewBox="0 0 24 24"><path d="M12 0c1 7 5 11 12 12-7 1-11 5-12 12-1-7-5-11-12-12 7-1 11-5 12-12z"/></svg>
+        <svg class="illu-scintilla" viewBox="0 0 24 24"><path d="M12 0c1 7 5 11 12 12-7 1-11 5-12 12-1-7-5-11-12-12 7-1 11-5 12-12z"/></svg>
+        <div class="illu-vetro illu-carta">
+          <span class="illu-piccolo">Carta d'identità</span>
+          <span class="illu-riga"><span class="illu-foto"></span><span class="illu-righe"><span class="illu-linea"></span><span class="illu-linea"></span><span class="illu-linea"></span></span></span>
+        </div>
+        <div class="illu-telefono">
+          <div class="illu-vetro">
+            <svg class="icona"><use href="#i-lucchetto"></use></svg>
+            <span class="illu-bottone">Entra</span>
+          </div>
+        </div>
+        <img class="mano-sorregge" src="assets/illustrazioni/mano-sorregge.svg" alt="">
+      </div>
     </div>
 
     <div id="area-profilo" class="pila-s" hidden>

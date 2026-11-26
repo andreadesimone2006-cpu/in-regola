@@ -7,20 +7,43 @@
 <meta name="description" content="Controlla i punti della patente, la revisione e le scadenze dei tuoi veicoli. Progetto didattico, dati di esempio.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#0b2f57">
-<link rel="icon" href="favicon.svg?v=9" type="image/svg+xml">
+<link rel="icon" href="favicon.svg?v=10" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/titillium-web-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/style.css?v=9">
+<link rel="stylesheet" href="assets/style.css?v=10">
 </head>
 <body data-pagina="home">
 <div id="testata"></div>
-<script src="assets/app.js?v=9"></script>
+<script src="assets/app.js?v=10"></script>
 
 <main id="contenuto" tabindex="-1">
   <div class="contenitore pila">
-    <div class="pila-s">
-      <h1>Cosa vuoi controllare oggi?</h1>
-      <p class="intro">Punti della patente, revisione e scadenze dei tuoi veicoli, tutto in un posto.</p>
-      <p class="rassicura"><svg class="icona" aria-hidden="true" focusable="false"><use href="#i-scudo"></use></svg>Controllare è gratis: qui non si paga nulla.</p>
+    <div class="con-illu">
+      <div class="pila-s">
+        <h1>Cosa vuoi controllare oggi?</h1>
+        <p class="intro">Punti della patente, revisione e scadenze dei tuoi veicoli, tutto in un posto.</p>
+        <p class="rassicura"><svg class="icona" aria-hidden="true" focusable="false"><use href="#i-scudo"></use></svg>Controllare è gratis: qui non si paga nulla.</p>
+      </div>
+      <div class="illu illu-home" aria-hidden="true">
+        <svg class="illu-scintilla" viewBox="0 0 24 24"><path d="M12 0c1 7 5 11 12 12-7 1-11 5-12 12-1-7-5-11-12-12 7-1 11-5 12-12z"/></svg>
+        <svg class="illu-scintilla" viewBox="0 0 24 24"><path d="M12 0c1 7 5 11 12 12-7 1-11 5-12 12-1-7-5-11-12-12 7-1 11-5 12-12z"/></svg>
+        <div class="illu-telefono">
+          <div class="illu-vetro">
+            <span class="illu-piccolo">Punti patente</span>
+            <span><span class="illu-grande">19</span> su 30</span>
+            <span class="illu-barra"></span>
+          </div>
+          <div class="illu-vetro">
+            <span class="illu-riga"><svg class="icona"><use href="#i-auto"></use></svg><strong>Fiat Panda</strong></span>
+            <span class="illu-piccolo">Revisione entro il 31/12/2026</span>
+          </div>
+          <div class="illu-vetro">
+            <span class="illu-riga"><svg class="icona"><use href="#i-auto"></use></svg><strong>Liberty 125</strong></span>
+            <span class="stato stato-ok"><svg class="icona"><use href="#i-spunta"></use></svg>In regola</span>
+          </div>
+        </div>
+        <img class="mano-sorregge" src="assets/illustrazioni/mano-sorregge.svg" alt="">
+        <img class="mano-tocca" src="assets/illustrazioni/mano-tocca.svg" alt="">
+      </div>
     </div>
 
     <div class="home-griglia">
@@ -70,7 +93,8 @@
       <div id="servizi-lista" class="servizi"></div>
     </section>
 
-    <section id="revisione" class="pila-s" aria-labelledby="t-revisione">
+    <section id="revisione" class="con-illu" aria-labelledby="t-revisione">
+      <div class="pila-s">
       <h2 id="t-revisione">Controlla la revisione con la targa</h2>
       <p class="testo">Scopri entro quando va fatta la prossima revisione di un'auto o di una moto. Non serve entrare.</p>
       <form id="form-targa" class="pila-s" novalidate>
@@ -83,6 +107,20 @@
         <div class="bottoni"><button class="btn btn-primario" type="submit">Controlla la revisione</button></div>
       </form>
       <div id="esito-targa" class="esito" aria-live="polite"></div>
+      </div>
+      <div class="illu illu-revisione" aria-hidden="true">
+        <svg class="illu-scintilla" viewBox="0 0 24 24"><path d="M12 0c1 7 5 11 12 12-7 1-11 5-12 12-1-7-5-11-12-12 7-1 11-5 12-12z"/></svg>
+        <svg class="illu-scintilla" viewBox="0 0 24 24"><path d="M12 0c1 7 5 11 12 12-7 1-11 5-12 12-1-7-5-11-12-12 7-1 11-5 12-12z"/></svg>
+        <div class="illu-vetro illu-targa">
+          <span class="illu-piccolo">Targa del veicolo</span>
+          <span class="targa"><span class="targa-i">I</span><span class="targa-testo">XA 482 KT</span></span>
+        </div>
+        <div class="illu-vetro illu-data">
+          <span class="illu-riga"><svg class="icona"><use href="#i-calendario"></use></svg><span class="illu-piccolo">Prossima revisione</span></span>
+          <strong>Entro il 31 dicembre 2026</strong>
+        </div>
+        <img class="mano-indica" src="assets/illustrazioni/mano-indica.svg" alt="">
+      </div>
     </section>
 
     <div class="avviso avviso-info">
